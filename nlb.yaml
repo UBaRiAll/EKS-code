@@ -6,15 +6,9 @@ metadata:
     service.beta.kubernetes.io/aws-load-balancer-type: nlb
 spec:
   selector:
-    app: ub-fargate-profile
+    app: istory-eks
   ports:
     - port: 8080
       targetPort: 8080
   type: LoadBalancer
 
-
-
-eksctl utils associate-iam-oidc-provider --cluster=DEMO-CLUSTER --approve
-
-
-eksctl create iamserviceaccount \ --name demo-sa\ --namespace default \ --cluster DEMO-CLUSTER \ --role-name demo-secret-access-role\ --attach-policy-arn <policy-arn>\ --approve \ --override-existing-serviceaccounts
