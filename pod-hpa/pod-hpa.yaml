@@ -1,0 +1,16 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: istory-hpa
+  namespace: default
+spec:
+  maxReplicas: 10 #최고로 증가하는 파드의 수량 지정 
+  metrics:
+  - resource:
+      name: cpu #파드의 수량이 증가하는 기준이 되는 메트릭 
+      target:
+        averageUtilization: 70 # 평균 사용량 기준 
+        type: Utilization
+    type: Resource
+  minReplicas: 1
+  scaleTargetRef:
