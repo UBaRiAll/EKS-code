@@ -39,8 +39,7 @@ spec:
                 secretKeyRef:
                   name: ub-db-secret
                   key: MYSQL_USER
-
-          
+        
           resources:
             requests: 
               cpu: 300m
