@@ -1,0 +1,32 @@
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: karpenter-provisioner
+spec:
+  requirements:
+      # instance type을 정의 여러개를 한번에 정의할 수 있습니다.
+    - key: node.kubernetes.io/instance-type
+      operator: In
+      values: [ c6i.8xlarge, c6i.4xlarge ]
+      # WorkerNode를 생성할 Zone
+    - key: topology.kubernetes.io/zone
+      operator: In
+      values: [ ap-northeast-2a, ap-northeast-2c ]
+      # on-demand, spot 중 원하는 인스턴스를 선언, 둘다 정의할 수 있습니다.
+    - key: karpenter.sh/capacity-type
+      operator: In
+      values: [ on-demand ]
+    - key: kubernetes.io/os
+      operator: In
+      values:
+        - linux
+    - key: kubernetes.io/arch
+      operator: In
+      values:
+        - amd64
+  consolidation:
+    enabled: false
+  providerRef:
+    name: karpenter-nodetemplate
+  ttlSecondsAfterEmpty: 30
+  ttlSecondsUntilExpired: 2592000

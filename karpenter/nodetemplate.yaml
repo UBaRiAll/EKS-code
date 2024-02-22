@@ -1,0 +1,32 @@
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: karpenter-nodetemplate
+spec:
+  # subnet, securityGroup tag
+  subnetSelector:
+    karpenter.sh/discovery: ub-cwave-cluster
+  securityGroupSelector:
+    karpenter.sh/discovery: ub-cwave-cluster
+  # WorkerNode Role Name
+  instanceProfile: KarpenterNodeRole-ub-cwave-cluster
+  # WorkerNode AMI
+  # amiFamily 사용 시 자동으로 최신버전의 AmazonLinux2 WorkerNode image 사용
+  # AL2, Bottlerocket, Ubuntu, Windows2019, Windows2022 등을 사용할 수 있습니다.
+  amiFamily: AL2
+  # 주석 처리 되어 있지만 amiSelector를 사용하여 특정 AMI 를 지정해줄 수도 있습니다.
+#  amiSelector:
+#    aws-ids: <<<AMI ID>>>
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 50
+        volumeType: gp3
+        iops: 10000
+        throughput: 125
+        deleteOnTermination: true
+  # WorkerNode tag
+  tags:
+    Name : karpenter-node
+  # WorkerNode userdata
+  # userData: <<<instance_userdata>>>
