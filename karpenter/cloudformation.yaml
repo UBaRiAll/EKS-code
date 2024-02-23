@@ -8,7 +8,7 @@ Resources:
   KarpenterNodeRole:
     Type: "AWS::IAM::Role"
     Properties:
-      RoleName: !Sub "KarpenterNodeRole-${ClusterName}"
+      RoleName: !Sub "KarpenterNodeRole-haesong-${ClusterName}"
       Path: /
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
@@ -27,7 +27,7 @@ Resources:
   KarpenterControllerPolicy:
     Type: AWS::IAM::ManagedPolicy
     Properties:
-      ManagedPolicyName: !Sub "KarpenterControllerPolicy-${ClusterName}"
+      ManagedPolicyName: !Sub "KarpenterControllerPolicy-haesong-${ClusterName}"
       # The PolicyDocument must be in JSON string format because we use a StringEquals condition that uses an interpolated
       # value in one of its key parameters which isn't natively supported by CloudFormation
       PolicyDocument: !Sub |
@@ -202,7 +202,7 @@ Resources:
             {
               "Sid": "AllowPassingInstanceRole",
               "Effect": "Allow",
-              "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/KarpenterNodeRole-${ClusterName}",
+              "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/KarpenterNodeRole-haesong-${ClusterName}",
               "Action": "iam:PassRole",
               "Condition": {
                 "StringEquals": {
@@ -283,7 +283,7 @@ Resources:
   KarpenterInterruptionQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: !Sub "${ClusterName}"
+      QueueName: !Sub "haesong-${ClusterName}"
       MessageRetentionPeriod: 300
       SqsManagedSseEnabled: true
   KarpenterInterruptionQueuePolicy:

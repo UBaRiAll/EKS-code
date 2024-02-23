@@ -1,30 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  istory
-  #fargate 로 하고싶다면 namespace : profile ns 설정
+  name: istory
   labels:
-    app:  istory-eks #fargate로 하고싶다면 이 역시도 profile 에 설정한label로 변경 
+    app: istory-eks
 spec:
   selector:
     matchLabels:
       app: istory-eks
-  replicas: 3
+#  replicas: 3
+  revisionHistoryLimit: 2 # 리소스의 이전 버전을 얼마나 오래 유지할지를 결정
   template:
     metadata:
       labels:
-        app:  istory-eks
+        app: istory-eks
     spec:
-      # volumes:
-      #   - name: ub-efs-pvc
-      #     persistentVolumeClaim:
-      #       claimName: ub-efs-pvc
       containers:
-        - name:  istory
-          image:  pinetree0308/istory
-          # volumeMounts:
-          #   - name: ub-efs-pvc
-          #     mountPath: /istory
+        - name: istory
+          image: 564131458637.dkr.ecr.ap-northeast-2.amazonaws.com/ub-ecr:latest
+          imagePullPolicy: Always
           envFrom:
             - configMapRef:
                 name: ub-app-config
@@ -39,15 +33,13 @@ spec:
                 secretKeyRef:
                   name: ub-db-secret
                   key: MYSQL_USER
-        
           resources:
-            requests: 
+            requests:
               cpu: 300m
               memory: 500Mi
             limits:
               cpu: 400m
               memory: 600Mi
           ports:
-            - containerPort: 8080
-              name:  istory
-
+            - name: istory
+              containerPort: 8080
