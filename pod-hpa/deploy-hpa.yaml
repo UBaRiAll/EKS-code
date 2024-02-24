@@ -1,12 +1,12 @@
-apiVersion: autoscaling/v2
+apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: istory-hpa
 spec:
   scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: istory-eks
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
+    name: dev-istory
   minReplicas: 1
   maxReplicas: 10
   metrics:
@@ -15,7 +15,7 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 30
+        averageUtilization: 65
   behavior:
     scaleDown:
       stabilizationWindowSeconds: 300
