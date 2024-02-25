@@ -35,10 +35,12 @@ metadata:
   name: default
 spec:
   amiFamily: AL2 # Amazon Linux 2
-  role: "KarpenterNodeRole-ub-cwave-cluster" # replace with your cluster name
+  role: KarpenterNodeRole-ub-cwave-cluster # replace with your cluster name
   subnetSelectorTerms:
     - tags:
-        karpenter.sh/discovery: "ub-cwave-cluster" # replace with your cluster name
+        karpenter.sh/discovery: ub-cwave-cluster # replace with your cluster name
+
   securityGroupSelectorTerms:
     - tags:
-        karpenter.sh/discovery: "ub-cwave-cluster" # replace with your cluster name
+        karpenter.sh/discovery: ub-cwave-cluster # replace with your cluster name
+
