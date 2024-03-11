@@ -6,7 +6,9 @@
 [아키텍처 링크](https://viewer.diagrams.net/index.html?tags=%7B%7D&target=blank&highlight=0000ff&edit=_blank&layers=1&nav=1&page-id=9BRYHBcp9KjD5vnArndL&title=%EC%9A%B0%EB%B0%94%EB%A6%AC%EC%98%AC.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1QmI5ELLuDr3Tjr4iyQ2ej1wjfC1AO8hy%26export%3Ddownload#%7B%22pageId%22%3A%229BRYHBcp9KjD5vnArndL%22%7D)
 
 올리브영의 중동 시장 진출 확대를 위한 인프라 구축 - 실시간 데이터 수집 파이프라인 & 운영에 최적화된 안정적인 인프라 구축을 중심으로
+
 2024년 1월 - 2월
+
 CJ Cloudwave 교육에서 실시한 프로젝트입니다.
 
 ✔️ Project
